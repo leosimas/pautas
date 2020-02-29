@@ -12,20 +12,6 @@ import kotlinx.coroutines.SupervisorJob
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application) {
 
-    companion object {
-        private var dbInstance: AppDatabase? = null
-    }
-
-    private val db : AppDatabase
-        get() {
-            if (dbInstance == null) {
-                dbInstance = Room.databaseBuilder(getApplication(),
-                    AppDatabase::class.java, "agenda")
-                    .build()
-            }
-            return dbInstance!!
-        }
-
     private val viewModelJob = SupervisorJob()
     protected val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     protected val bgScope = CoroutineScope(Dispatchers.IO + viewModelJob)

@@ -9,17 +9,18 @@ import com.leosimas.udsagenda.service.AgendaService
 import com.leosimas.udsagenda.service.ErrorCode
 import com.leosimas.udsagenda.ui.common.Validation
 import com.leosimas.udsagenda.ui.common.BaseViewModel
+import com.leosimas.udsagenda.ui.signup.SignUpForm
 import kotlinx.coroutines.launch
 
 class LoginViewModel(application: Application) : BaseViewModel(application) {
 
-    private val loginForm = MutableLiveData<LoginForm?>()
-    fun getLoginForm() : LiveData<LoginForm?> = loginForm
+    private val loginForm = MutableLiveData<SignUpForm?>()
+    fun getLoginForm() : LiveData<SignUpForm?> = loginForm
     private val loginSuccess = MutableLiveData<Boolean>()
     fun getLoginSuccess() : LiveData<Boolean> = loginSuccess
 
-    private fun validateLogin(email: String?, password: String?) : LoginForm? {
-        val form = LoginForm()
+    private fun validateLogin(email: String?, password: String?) : SignUpForm? {
+        val form = SignUpForm()
         val list = arrayOf(
             Validation(email.isNullOrBlank()) { form.emailError = R.string.email_required },
             Validation(password.isNullOrBlank()) { form.passwordError = R.string.password_required },
@@ -36,17 +37,21 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
         isLoading.value = true
 
         bgScope.launch {
-            val res = AgendaService.login(email!!, password!!)
+            val res = AgendaService.login(getApplication(), email!!, password!!)
             if (res.success) {
                 loginSucceeded()
                 return@launch
             }
-            if (res.error == ErrorCode.WRONG_PASSWORD) {
-                uiScope.launch {
-                    isLoading.value = false
-                    loginForm.value = LoginForm().apply {
-                        passwordError = R.string.wrong_password }
-                }
+
+            val form = SignUpForm()
+            when(res.error) {
+                ErrorCode.WRONG_PASSWORD -> form.passwordError = R.string.wrong_password
+                else -> form.emailError = R.string.email_not_found
+            }
+
+            uiScope.launch {
+                isLoading.value = false
+                loginForm.value = form
             }
         }
     }

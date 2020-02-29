@@ -1,15 +1,50 @@
 package com.leosimas.udsagenda.service
 
+import android.content.Context
+import android.database.sqlite.SQLiteConstraintException
+import androidx.room.Room
+import com.leosimas.udsagenda.bean.User
+import com.leosimas.udsagenda.dao.AppDatabase
+
 object AgendaService {
+
+    private var dbInstance: AppDatabase? = null
+
+    private fun getDB(context: Context) : AppDatabase {
+        if (dbInstance == null) {
+            dbInstance = Room.databaseBuilder(context.applicationContext,
+                AppDatabase::class.java, "uds_agenda")
+                .build()
+        }
+        return dbInstance!!
+    }
 
     private fun fakeRequestTime() {
         Thread.sleep(2000)
     }
 
-    fun login(email: String, password: String) : Response {
+    fun login(context: Context, email: String, password: String) : Response {
         fakeRequestTime()
-        if ("123456" != password) return Response(false, ErrorCode.WRONG_PASSWORD)
-        return Response(true, null)
+
+        val user = getDB(context).userDAO().findByEmail(email)
+            ?: return Response(false, ErrorCode.EMAIL_NOT_FOUND)
+
+        if (user.password != password)
+            return Response(false, ErrorCode.WRONG_PASSWORD)
+
+        return Response.SUCCESS
+    }
+
+    fun signUp(context: Context, name: String, email: String, password: String): Response {
+        fakeRequestTime()
+
+        try {
+            getDB(context).userDAO().insert(User(email, name, password))
+        } catch (e : SQLiteConstraintException) {
+            return Response(false, ErrorCode.EMAIL_ALREADY_USED)
+        }
+
+        return Response.SUCCESS
     }
 
 }

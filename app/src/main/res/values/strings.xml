@@ -9,4 +9,11 @@
     <string name="password_required">Digite a senha</string>
     <string name="invalid_email">Email inválido</string>
     <string name="wrong_password">Senha incorreta</string>
+    <string name="email_not_found">Email não encontrado</string>
+    <string name="name_required">Digite seu nome</string>
+    <string name="passwords_dont_match">As senhas devem ser iguais</string>
+    <string name="name">Nome</string>
+    <string name="password_confirm">Confirme a senha</string>
+    <string name="user_created">Cadastro efetuado</string>
+    <string name="email_already_used">Email já cadastrado</string>
 </resources>

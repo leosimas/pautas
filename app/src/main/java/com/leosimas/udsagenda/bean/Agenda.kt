@@ -14,6 +14,6 @@ data class Agenda(
     @ColumnInfo(name = "title") var title: String,
     @ColumnInfo(name = "description") var seed: String,
     @ColumnInfo(name = "details") var details: String,
-    @ColumnInfo(name = "author") var author: String,
+    @ColumnInfo(name = "author") val author: String,
     @ColumnInfo(name = "open") var open: Boolean
 ) : Parcelable

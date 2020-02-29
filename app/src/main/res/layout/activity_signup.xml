@@ -18,7 +18,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textName"
-                android:theme="@style/TextInputLayoutAppearance"
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -32,7 +32,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textEmail"
-                android:theme="@style/TextInputLayoutAppearance"
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -46,7 +46,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textPassword"
-                android:theme="@style/TextInputLayoutAppearance"
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true">
@@ -61,7 +61,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textPasswordConfirm"
-                android:theme="@style/TextInputLayoutAppearance"
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true">

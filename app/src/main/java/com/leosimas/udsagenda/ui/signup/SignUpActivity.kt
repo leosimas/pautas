@@ -6,10 +6,7 @@ import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.leosimas.udsagenda.R
-import com.leosimas.udsagenda.extension.getString
-import com.leosimas.udsagenda.extension.gone
-import com.leosimas.udsagenda.extension.toastShort
-import com.leosimas.udsagenda.extension.visible
+import com.leosimas.udsagenda.extension.*
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignUpActivity : AppCompatActivity() {
@@ -28,6 +25,7 @@ class SignUpActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         buttonSignUp.setOnClickListener {
+            hideKeyboard(textPasswordConfirm)
             viewModel.doSignUp(
                 textName.editText?.text.toString(),
                 textEmail.editText?.text.toString(),

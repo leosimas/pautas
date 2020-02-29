@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.leosimas.udsagenda.R
 import com.leosimas.udsagenda.extension.getString
 import com.leosimas.udsagenda.extension.gone
+import com.leosimas.udsagenda.extension.hideKeyboard
 import com.leosimas.udsagenda.extension.visible
 import com.leosimas.udsagenda.ui.signup.SignUpActivity
 import com.leosimas.udsagenda.ui.signup.SignUpViewModel
@@ -26,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initViews() {
         buttonLogin.setOnClickListener {
+            hideKeyboard(textPassword)
             viewModel.doLogin(textEmail.editText?.text.toString(),
                 textPassword.editText?.text.toString())
         }

@@ -16,4 +16,8 @@
     <string name="password_confirm">Confirme a senha</string>
     <string name="user_created">Cadastro efetuado</string>
     <string name="email_already_used">Email já cadastrado</string>
+    <string name="msg_recover_password">Insira o email e enviaremos uma mensagem com as instruções de recuperação de senha.</string>
+    <string name="send_email">Enviar email</string>
+    <string name="msg_recover_check_email">Sua senha foi enviada por email</string>
+    <string name="ok">OK</string>
 </resources>

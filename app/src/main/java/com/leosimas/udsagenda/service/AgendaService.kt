@@ -47,4 +47,13 @@ object AgendaService {
         return Response.SUCCESS
     }
 
+    fun recoverPassword(context: Context, email: String): Response {
+        fakeRequestTime()
+
+        getDB(context).userDAO().findByEmail(email)
+            ?: return Response(false, ErrorCode.EMAIL_NOT_FOUND)
+
+        return Response.SUCCESS
+    }
+
 }

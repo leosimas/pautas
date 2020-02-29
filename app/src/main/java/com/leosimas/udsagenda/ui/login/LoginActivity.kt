@@ -10,6 +10,7 @@ import com.leosimas.udsagenda.extension.getString
 import com.leosimas.udsagenda.extension.gone
 import com.leosimas.udsagenda.extension.hideKeyboard
 import com.leosimas.udsagenda.extension.visible
+import com.leosimas.udsagenda.ui.recoverpassword.RecoverActivity
 import com.leosimas.udsagenda.ui.signup.SignUpActivity
 import com.leosimas.udsagenda.ui.signup.SignUpViewModel
 import kotlinx.android.synthetic.main.activity_login.*
@@ -44,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getIsLoading().observe(this, Observer {
             if (it) viewLoading.visible() else viewLoading.gone()
         })
-        viewModel.getLoginSuccess().observe(this, Observer {
+        viewModel.getRequestSuccess().observe(this, Observer {
             // TODO go to Agenda List activity
         })
     }
@@ -54,6 +55,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showRecoverPassword() {
-        // TODO
+        startActivity(Intent(this, RecoverActivity::class.java))
     }
 }

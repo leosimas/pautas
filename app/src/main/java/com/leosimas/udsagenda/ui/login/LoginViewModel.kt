@@ -16,8 +16,6 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     private val loginForm = MutableLiveData<SignUpForm?>()
     fun getLoginForm() : LiveData<SignUpForm?> = loginForm
-    private val loginSuccess = MutableLiveData<Boolean>()
-    fun getLoginSuccess() : LiveData<Boolean> = loginSuccess
 
     private fun validateLogin(email: String?, password: String?) : SignUpForm? {
         val form = SignUpForm()
@@ -39,7 +37,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
         bgScope.launch {
             val res = AgendaService.login(getApplication(), email!!, password!!)
             if (res.success) {
-                loginSucceeded()
+                requestSucceeded()
                 return@launch
             }
 
@@ -53,13 +51,6 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                 isLoading.value = false
                 loginForm.value = form
             }
-        }
-    }
-
-    private fun loginSucceeded() {
-        uiScope.launch {
-            isLoading.value = false
-            loginSuccess.value = true
         }
     }
 

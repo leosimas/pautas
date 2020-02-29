@@ -9,6 +9,7 @@ import com.leosimas.udsagenda.dao.AppDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -18,11 +19,20 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
     protected val isLoading = MutableLiveData<Boolean>(false)
     fun getIsLoading() : LiveData<Boolean> = isLoading
+    protected val requestSuccess = MutableLiveData<Boolean>(false)
+    fun getRequestSuccess() : LiveData<Boolean> = requestSuccess
 
     protected fun <T> validateForm(list: Array<Validation>, form: T): T? {
         list.filter { it.isInvalid }.forEach { it.function.invoke() }
         if (list.any { it.isInvalid }) return form
         return null
+    }
+
+    protected fun requestSucceeded() {
+        uiScope.launch {
+            isLoading.value = false
+            requestSuccess.value = true
+        }
     }
 
 }

@@ -1,7 +1,9 @@
-package com.leosimas.udsagenda.viewmodel
+package com.leosimas.udsagenda.ui.common
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import com.leosimas.udsagenda.dao.AppDatabase
 import kotlinx.coroutines.CoroutineScope
@@ -24,18 +26,17 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
             return dbInstance!!
         }
 
-    /**
-     * This is the job for all coroutines started by this ViewModel.
-     * Cancelling this job will cancel all coroutines started by this ViewModel.
-     */
     private val viewModelJob = SupervisorJob()
-
-    /**
-     * This is the main scope for all coroutines launched by MainViewModel.
-     * Since we pass viewModelJob, you can cancel all coroutines
-     * launched by uiScope by calling viewModelJob.cancel()
-     */
     protected val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    protected val bgScope = CoroutineScope(Dispatchers.IO + viewModelJob)
 
+    protected val isLoading = MutableLiveData<Boolean>(false)
+    fun getIsLoading() : LiveData<Boolean> = isLoading
+
+    protected fun <T> validateForm(list: Array<Validation>, form: T): T? {
+        list.filter { it.isInvalid }.forEach { it.function.invoke() }
+        if (list.any { it.isInvalid }) return form
+        return null
+    }
 
 }

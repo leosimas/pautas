@@ -5,4 +5,8 @@
     <string name="login">Entrar</string>
     <string name="recover_password">Recuperar senha</string>
     <string name="sign_up">Cadastrar</string>
+    <string name="email_required">Digite o email</string>
+    <string name="password_required">Digite a senha</string>
+    <string name="invalid_email">Email inválido</string>
+    <string name="wrong_password">Senha incorreta</string>
 </resources>

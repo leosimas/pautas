@@ -4,8 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.room.Room
-import com.leosimas.udsagenda.dao.AppDatabase
+import com.hadilq.liveevent.LiveEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -19,8 +18,8 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
     protected val isLoading = MutableLiveData<Boolean>(false)
     fun getIsLoading() : LiveData<Boolean> = isLoading
-    protected val requestSuccess = MutableLiveData<Boolean>(false)
-    fun getRequestSuccess() : LiveData<Boolean> = requestSuccess
+    protected val requestSuccess = LiveEvent<Boolean>()
+    open fun getRequestSuccess() : LiveData<Boolean> = requestSuccess
 
     protected fun <T> validateForm(list: Array<Validation>, form: T): T? {
         list.filter { it.isInvalid }.forEach { it.function.invoke() }

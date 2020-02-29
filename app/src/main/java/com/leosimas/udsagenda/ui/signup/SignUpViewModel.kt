@@ -6,9 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import com.leosimas.udsagenda.R
 import com.leosimas.udsagenda.extension.isValidEmail
 import com.leosimas.udsagenda.service.AgendaService
-import com.leosimas.udsagenda.service.ErrorCode
-import com.leosimas.udsagenda.ui.common.Validation
 import com.leosimas.udsagenda.ui.common.BaseViewModel
+import com.leosimas.udsagenda.ui.common.Validation
 import kotlinx.coroutines.launch
 
 class SignUpViewModel(application: Application) : BaseViewModel(application) {

@@ -40,7 +40,7 @@ class RecoverActivity : AppCompatActivity() {
             if (it) viewLoading.visible() else viewLoading.gone()
         })
         viewModel.getRequestSuccess().observe(this, Observer {
-            if (it) showSuccessDialog()
+            showSuccessDialog()
         })
     }
 

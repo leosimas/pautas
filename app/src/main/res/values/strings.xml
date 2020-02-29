@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UDS Agenda</string>
+    <string name="app_name">UDS Pautas</string>
     <string name="email">Email</string>
     <string name="password">Senha</string>
     <string name="login">Entrar</string>
@@ -20,4 +20,8 @@
     <string name="send_email">Enviar email</string>
     <string name="msg_recover_check_email">Sua senha foi enviada por email</string>
     <string name="ok">OK</string>
+    <string name="open_agendas">Abertas</string>
+    <string name="closed_agendas">Finalizadas</string>
+    <string name="logout">sair</string>
+    <string name="profile">Perfil</string>
 </resources>

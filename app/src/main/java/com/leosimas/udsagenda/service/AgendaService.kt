@@ -5,8 +5,11 @@ import android.database.sqlite.SQLiteConstraintException
 import androidx.room.Room
 import com.leosimas.udsagenda.bean.User
 import com.leosimas.udsagenda.dao.AppDatabase
+import com.leosimas.udsagenda.dao.SharedPref
 
 object AgendaService {
+
+    private var loggedUser : User? = null
 
     private var dbInstance: AppDatabase? = null
 
@@ -23,6 +26,13 @@ object AgendaService {
         Thread.sleep(2000)
     }
 
+    fun getLoggedUser(context: Context) : User? {
+        if (loggedUser == null){
+            loggedUser = SharedPref.loadUser(context)
+        }
+        return loggedUser
+    }
+
     fun login(context: Context, email: String, password: String) : Response {
         fakeRequestTime()
 
@@ -31,6 +41,9 @@ object AgendaService {
 
         if (user.password != password)
             return Response(false, ErrorCode.WRONG_PASSWORD)
+
+        loggedUser = User(user.email, user.name, "")
+        SharedPref.saveUser(context, user)
 
         return Response.SUCCESS
     }
@@ -54,6 +67,11 @@ object AgendaService {
             ?: return Response(false, ErrorCode.EMAIL_NOT_FOUND)
 
         return Response.SUCCESS
+    }
+
+    fun logout(context: Context) {
+        loggedUser = null
+        SharedPref.saveUser(context, null)
     }
 
 }

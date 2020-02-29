@@ -1,8 +1,8 @@
 package com.leosimas.udsagenda.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.leosimas.udsagenda.R
@@ -10,9 +10,9 @@ import com.leosimas.udsagenda.extension.getString
 import com.leosimas.udsagenda.extension.gone
 import com.leosimas.udsagenda.extension.hideKeyboard
 import com.leosimas.udsagenda.extension.visible
+import com.leosimas.udsagenda.ui.agendalist.AgendaListActivity
 import com.leosimas.udsagenda.ui.recoverpassword.RecoverActivity
 import com.leosimas.udsagenda.ui.signup.SignUpActivity
-import com.leosimas.udsagenda.ui.signup.SignUpViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -38,6 +38,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initViewModel() {
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        viewModel.getLoggedUser()?.let {
+            showAgendaList()
+        }
         viewModel.getLoginForm().observe(this, Observer {
             textEmail.error = getString(it?.emailError)
             textPassword.error = getString(it?.passwordError)
@@ -46,8 +49,13 @@ class LoginActivity : AppCompatActivity() {
             if (it) viewLoading.visible() else viewLoading.gone()
         })
         viewModel.getRequestSuccess().observe(this, Observer {
-            // TODO go to Agenda List activity
+            showAgendaList()
         })
+    }
+
+    private fun showAgendaList() {
+        startActivity(Intent(this, AgendaListActivity::class.java))
+        finish()
     }
 
     private fun showSignUp() {

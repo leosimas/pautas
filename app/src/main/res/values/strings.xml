@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UDS Agenda</string>
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="login">Entrar</string>
+    <string name="recover_password">Recuperar senha</string>
+    <string name="sign_up">Cadastrar</string>
+</resources>

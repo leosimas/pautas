@@ -24,14 +24,19 @@ class SignUpActivity : AppCompatActivity() {
         supportActionBar?.setTitle(R.string.sign_up)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        buttonSignUp.setOnClickListener {
-            hideKeyboard(textPasswordConfirm)
-            viewModel.doSignUp(
-                textName.editText?.text.toString(),
-                textEmail.editText?.text.toString(),
-                textPassword.editText?.text.toString(),
-                textPasswordConfirm.editText?.text.toString())
-        }
+        buttonSignUp.setOnClickListener { doSignUp() }
+        textPasswordConfirm.editText?.setDoneAction { doSignUp() }
+
+        clearErrorsWhenTextChange(textName, textEmail, textPassword, textPasswordConfirm)
+    }
+
+    private fun doSignUp() {
+        hideKeyboard(textPasswordConfirm)
+        viewModel.doSignUp(
+            textName.editText?.text.toString(),
+            textEmail.editText?.text.toString(),
+            textPassword.editText?.text.toString(),
+            textPasswordConfirm.editText?.text.toString())
     }
 
     private fun initViewModel() {

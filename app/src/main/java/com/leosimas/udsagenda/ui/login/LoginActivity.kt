@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.leosimas.udsagenda.R
-import com.leosimas.udsagenda.extension.getString
-import com.leosimas.udsagenda.extension.gone
-import com.leosimas.udsagenda.extension.hideKeyboard
-import com.leosimas.udsagenda.extension.visible
+import com.leosimas.udsagenda.extension.*
 import com.leosimas.udsagenda.ui.agendalist.AgendaListActivity
 import com.leosimas.udsagenda.ui.recoverpassword.RecoverActivity
 import com.leosimas.udsagenda.ui.signup.SignUpActivity
@@ -27,13 +24,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        buttonLogin.setOnClickListener {
-            hideKeyboard(textPassword)
-            viewModel.doLogin(textEmail.editText?.text.toString(),
-                textPassword.editText?.text.toString())
-        }
+        buttonLogin.setOnClickListener { doLogin() }
+        textPassword.editText?.setDoneAction { doLogin() }
         buttonSignUp.setOnClickListener { showSignUp() }
         buttonRecoverPassword.setOnClickListener { showRecoverPassword() }
+        clearErrorsWhenTextChange(textEmail, textPassword)
+    }
+
+    private fun doLogin() {
+        hideKeyboard(textPassword)
+        viewModel.doLogin(textEmail.editText?.text.toString(),
+            textPassword.editText?.text.toString())
     }
 
     private fun initViewModel() {

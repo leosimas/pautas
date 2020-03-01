@@ -25,10 +25,14 @@ class RecoverActivity : AppCompatActivity() {
         supportActionBar?.setTitle(R.string.recover_password)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        buttonRecover.setOnClickListener {
-            hideKeyboard(textEmail)
-            viewModel.doRecover(textEmail.editText?.text.toString())
-        }
+        buttonRecover.setOnClickListener { doRecover() }
+        textEmail.editText?.setDoneAction { doRecover() }
+        clearErrorsWhenTextChange(textEmail)
+    }
+
+    private fun doRecover() {
+        hideKeyboard(textEmail)
+        viewModel.doRecover(textEmail.editText?.text.toString())
     }
 
     private fun initViewModel() {

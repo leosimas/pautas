@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.leosimas.udsagenda.R
+import com.leosimas.udsagenda.extension.clearErrorsWhenTextChange
 import com.leosimas.udsagenda.extension.enableWhenAllFilled
 import com.leosimas.udsagenda.extension.getString
+import com.leosimas.udsagenda.extension.setDoneAction
 import kotlinx.android.synthetic.main.activity_agenda.*
 
 class AgendaActivity : AppCompatActivity() {
@@ -30,14 +32,18 @@ class AgendaActivity : AppCompatActivity() {
             textAuthor.editText
         )
 
-        buttonFinish.setOnClickListener {
-            viewModel.createAgenda(
-                textTitle.editText?.text.toString(),
-                textDescription.editText?.text.toString(),
-                textDetails.editText?.text.toString(),
-                textAuthor.editText?.text.toString()
-            )
-        }
+        buttonFinish.setOnClickListener { doCreate() }
+    }
+
+    private fun doCreate() {
+        if ( !buttonFinish.isEnabled ) return
+
+        viewModel.createAgenda(
+            textTitle.editText?.text.toString(),
+            textDescription.editText?.text.toString(),
+            textDetails.editText?.text.toString(),
+            textAuthor.editText?.text.toString()
+        )
     }
 
     private fun initViewModel() {

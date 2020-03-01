@@ -15,24 +15,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:minHeight="?actionBarSize">
+            android:minHeight="?actionBarSize"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:padding="@dimen/appbar_padding"
+                android:layout_height="match_parent"
+                android:gravity="start|center_vertical"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/buttonProfile"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_person"
+                app:srcCompat="@drawable/ic_person"
                 android:tint="@color/white"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 />
@@ -43,7 +44,10 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary" />
+            android:background="?attr/colorPrimary"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextColor="@color/white"
+            />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -58,7 +62,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add"
+        app:srcCompat="@drawable/ic_add"
         android:tint="@color/white"
+        android:foregroundTint="@color/white"
+        android:backgroundTint="@color/colorAccent"
         />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

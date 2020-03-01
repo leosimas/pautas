@@ -8,14 +8,6 @@ import com.leosimas.udsagenda.ui.common.BaseViewModel
 
 class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
-    private val profile = MutableLiveData<ProfileData>()
-    fun getProfile() : LiveData<ProfileData> {
-        AgendaService.getLoggedUser(getApplication())?.let {
-            profile.value = ProfileData(it.name, it.email)
-        }
-        return profile
-    }
-
     fun doLogout() {
         AgendaService.logout(getApplication())
         requestSuccess.value = true

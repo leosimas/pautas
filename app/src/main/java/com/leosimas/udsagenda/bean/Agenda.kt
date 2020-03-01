@@ -12,7 +12,7 @@ import kotlinx.android.parcel.Parcelize
 data class Agenda(
     @PrimaryKey val uid: Int?,
     @ColumnInfo(name = "title") var title: String,
-    @ColumnInfo(name = "description") var seed: String,
+    @ColumnInfo(name = "description") var description: String,
     @ColumnInfo(name = "details") var details: String,
     @ColumnInfo(name = "author") val author: String,
     @ColumnInfo(name = "open") var open: Boolean

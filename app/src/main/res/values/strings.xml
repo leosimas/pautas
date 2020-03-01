@@ -24,4 +24,13 @@
     <string name="closed_agendas">Finalizadas</string>
     <string name="logout">sair</string>
     <string name="profile">Perfil</string>
+    <string name="title">Título</string>
+    <string name="description">Descrição</string>
+    <string name="details">Detalhes</string>
+    <string name="finish">Finalizar</string>
+    <string name="author">Autor</string>
+    <string name="title_required">Digite o título</string>
+    <string name="description_required">Digite uma descrição</string>
+    <string name="details_required">Digite o detalhamento</string>
+    <string name="author_required">Digite o nome do autor</string>
 </resources>

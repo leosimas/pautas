@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.leosimas.udsagenda.R
+import com.leosimas.udsagenda.ui.agenda.AgendaActivity
 import com.leosimas.udsagenda.ui.login.LoginActivity
 import com.leosimas.udsagenda.ui.profile.ProfileActivity
 import kotlinx.android.synthetic.main.activity_agenda_list.*
@@ -13,6 +14,7 @@ class AgendaListActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_PROFILE = 123
+        private const val REQUEST_AGENDA = 234
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,12 +27,14 @@ class AgendaListActivity : AppCompatActivity() {
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         viewPager.adapter = sectionsPagerAdapter
         tabs.setupWithViewPager(viewPager)
-        fab.setOnClickListener { _ ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-        }
+        fab.setOnClickListener { showAgendaForm() }
 
         buttonProfile.setOnClickListener { showProfile() }
+    }
+
+    private fun showAgendaForm() {
+        startActivityForResult(Intent(this, AgendaActivity::class.java),
+            REQUEST_AGENDA)
     }
 
     private fun showProfile() {

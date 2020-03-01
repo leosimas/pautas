@@ -3,6 +3,7 @@ package com.leosimas.udsagenda.service
 import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
 import androidx.room.Room
+import com.leosimas.udsagenda.bean.Agenda
 import com.leosimas.udsagenda.bean.User
 import com.leosimas.udsagenda.dao.AppDatabase
 import com.leosimas.udsagenda.dao.SharedPref
@@ -72,6 +73,23 @@ object AgendaService {
     fun logout(context: Context) {
         loggedUser = null
         SharedPref.saveUser(context, null)
+    }
+
+    fun createAgenda(
+        context: Context,
+        title: String,
+        description: String,
+        details: String,
+        author: String
+    ): Response {
+        getDB(context).agendaDAO().insert(Agenda(
+            null, title,description, details, author, true))
+        return Response.SUCCESS
+    }
+
+    fun save(context: Context, agenda: Agenda): Response {
+        getDB(context).agendaDAO().update(agenda)
+        return Response.SUCCESS
     }
 
 }

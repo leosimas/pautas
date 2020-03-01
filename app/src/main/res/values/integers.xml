@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_name">100</integer>
+    <integer name="max_title">30</integer>
+    <integer name="max_description">40</integer>
+    <integer name="max_details">200</integer>
+    <integer name="max_email">100</integer>
+    <integer name="max_password">30</integer>
+</resources>

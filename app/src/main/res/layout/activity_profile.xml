@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/name"
             android:inputType="textPersonName"
-            android:maxLength="100"
+            android:maxLength="@integer/max_name"
             android:enabled="false"
             android:textColor="@color/black"
             />
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:maxLength="100"
+            android:maxLength="@integer/max_email"
             android:enabled="false"
             android:textColor="@color/black"
             />

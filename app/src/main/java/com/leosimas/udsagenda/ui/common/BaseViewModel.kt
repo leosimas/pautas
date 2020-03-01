@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hadilq.liveevent.LiveEvent
+import com.leosimas.udsagenda.service.AgendaService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -20,6 +21,14 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     fun getIsLoading() : LiveData<Boolean> = isLoading
     protected val requestSuccess = LiveEvent<Boolean>()
     open fun getRequestSuccess() : LiveData<Boolean> = requestSuccess
+
+    private val profile = MutableLiveData<ProfileData>()
+    fun getProfile() : LiveData<ProfileData> {
+        AgendaService.getLoggedUser(getApplication())?.let {
+            profile.value = ProfileData(it.name, it.email)
+        }
+        return profile
+    }
 
     protected fun <T> validateForm(list: Array<Validation>, form: T): T? {
         list.filter { it.isInvalid }.forEach { it.function.invoke() }

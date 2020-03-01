@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
-                    android:maxLength="100"
+                    android:maxLength="@integer/max_email"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:maxLength="40"
+                    android:maxLength="@integer/max_password"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 

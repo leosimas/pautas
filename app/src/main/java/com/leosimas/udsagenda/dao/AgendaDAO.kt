@@ -1,9 +1,6 @@
 package com.leosimas.udsagenda.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.leosimas.udsagenda.bean.Agenda
 
 @Dao
@@ -17,5 +14,8 @@ interface AgendaDAO {
 
     @Insert
     fun insert(agenda: Agenda)
+
+    @Update
+    fun update(agenda: Agenda)
 
 }

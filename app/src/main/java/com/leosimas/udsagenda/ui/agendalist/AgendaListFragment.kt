@@ -35,6 +35,12 @@ class AgendaListFragment : Fragment() {
     private lateinit var adapter: AgendaAdapter
     private lateinit var viewModel: AgendaListViewModel
 
+    private val receiver = object : AgendaListReceiver() {
+        override fun onRefresh() {
+            viewModel.refresh()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,6 +50,7 @@ class AgendaListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AgendaListReceiver.register(context, receiver)
         initViewModel()
     }
 
@@ -52,6 +59,11 @@ class AgendaListFragment : Fragment() {
         adapter = AgendaAdapter()
         recycleView.adapter = adapter
         recycleView.layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        context?.unregisterReceiver(receiver)
     }
 
     private fun initViewModel() {

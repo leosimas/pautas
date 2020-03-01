@@ -13,7 +13,14 @@ class AgendaListViewModel(application: Application) : BaseViewModel(application)
     private val agendas = MutableLiveData<List<Agenda>>()
     val listAgendas: LiveData<List<Agenda>> = agendas
 
+    private lateinit var filter: AgendaFilter
+
     fun setFilter(filter: AgendaFilter) {
+        this.filter = filter
+        refresh()
+    }
+
+    fun refresh() {
         bgScope.launch {
             val list = AgendaService.listAgendas(getApplication(), filter == AgendaFilter.OPEN)
             uiScope.launch {

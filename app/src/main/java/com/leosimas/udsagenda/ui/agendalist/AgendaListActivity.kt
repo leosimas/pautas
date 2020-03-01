@@ -13,9 +13,12 @@ import kotlinx.android.synthetic.main.activity_agenda_list.*
 class AgendaListActivity : AppCompatActivity() {
 
     companion object {
+
         private const val REQUEST_PROFILE = 123
         private const val REQUEST_AGENDA = 234
     }
+
+    private lateinit var pagerAdapter: AgendaListPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +27,8 @@ class AgendaListActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        val sectionsPagerAdapter = AgendaListPagerAdapter(this, supportFragmentManager)
-        viewPager.adapter = sectionsPagerAdapter
+        pagerAdapter = AgendaListPagerAdapter(this, supportFragmentManager)
+        viewPager.adapter = pagerAdapter
         tabs.setupWithViewPager(viewPager)
         fab.setOnClickListener { showAgendaForm() }
 
@@ -47,6 +50,8 @@ class AgendaListActivity : AppCompatActivity() {
         if (requestCode == REQUEST_PROFILE && resultCode == Activity.RESULT_OK) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+        } else if (requestCode == REQUEST_AGENDA && resultCode == Activity.RESULT_OK) {
+            AgendaListReceiver.sendRefresh(this)
         }
     }
 }

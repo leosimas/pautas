@@ -37,6 +37,7 @@ class AgendaListFragment : Fragment() {
         }
     }
 
+    private lateinit var filter: AgendaFilter
     private lateinit var adapter: AgendaAdapter
     private lateinit var viewModel: AgendaListViewModel
 
@@ -56,6 +57,9 @@ class AgendaListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AgendaListReceiver.register(context, receiver)
+        val ordinal = arguments?.getInt(ARG_FILTER)
+        filter = AgendaFilter.values().find { ordinal == it.ordinal }
+            ?: AgendaFilter.OPEN
         initViewModel()
     }
 
@@ -69,6 +73,9 @@ class AgendaListFragment : Fragment() {
                 context, DividerItemDecoration.VERTICAL
             )
         )
+        var resFilter = if (filter == AgendaFilter.OPEN) R.string.open_agenda
+            else R.string.closed_agenda
+        textEmpty.text = getString(R.string.empty_agenda_list, getString(resFilter))
     }
 
     override fun onDestroy() {
@@ -79,13 +86,11 @@ class AgendaListFragment : Fragment() {
     private fun initViewModel() {
         viewModel = ViewModelProvider(this).get(AgendaListViewModel::class.java)
             .apply {
-                val ordinal = arguments?.getInt(ARG_FILTER)
-                val filter = AgendaFilter.values().find { ordinal == it.ordinal }
-                    ?: AgendaFilter.OPEN
                 setFilter(filter)
             }
         viewModel.listAgendas.observe(this, Observer {
             adapter.update(it)
+            if (it.isEmpty()) textEmpty.visible() else textEmpty.gone()
         })
     }
 

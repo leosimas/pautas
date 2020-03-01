@@ -28,4 +28,12 @@ class AgendaListViewModel(application: Application) : BaseViewModel(application)
             }
         }
     }
+
+    fun toggle(agenda: Agenda) {
+        agenda.open = !agenda.open
+        bgScope.launch {
+            AgendaService.save(getApplication(), agenda)
+            AgendaListReceiver.sendRefresh(getApplication())
+        }
+    }
 }

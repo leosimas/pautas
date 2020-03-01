@@ -42,5 +42,37 @@
         app:layout_constraintTop_toBottomOf="@id/descriptionBarrier"
         tools:text="small description here" />
 
+    <LinearLayout
+        android:id="@+id/viewExpand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/margin_medium"
+        app:layout_constraintTop_toBottomOf="@+id/textDescription"
+        >
+
+        <TextView
+            android:id="@+id/textDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/textAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            />
+
+        <Button
+            android:id="@+id/buttonToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/reopen"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/margin_small"
+            />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

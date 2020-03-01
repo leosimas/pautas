@@ -92,4 +92,8 @@ object AgendaService {
         return Response.SUCCESS
     }
 
+    fun listAgendas(context: Context, open: Boolean): List<Agenda> {
+        return getDB(context).agendaDAO().getAll(open)
+    }
+
 }

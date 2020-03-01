@@ -32,10 +32,10 @@ class AgendaActivity : AppCompatActivity() {
 
         buttonFinish.setOnClickListener {
             viewModel.createAgenda(
-                textTitle.editText.toString(),
-                textDescription.editText.toString(),
-                textDetails.editText.toString(),
-                textAuthor.editText.toString()
+                textTitle.editText?.text.toString(),
+                textDescription.editText?.text.toString(),
+                textDetails.editText?.text.toString(),
+                textAuthor.editText?.text.toString()
             )
         }
     }

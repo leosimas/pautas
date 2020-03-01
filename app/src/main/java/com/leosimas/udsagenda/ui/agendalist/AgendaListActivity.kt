@@ -24,7 +24,7 @@ class AgendaListActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
+        val sectionsPagerAdapter = AgendaListPagerAdapter(this, supportFragmentManager)
         viewPager.adapter = sectionsPagerAdapter
         tabs.setupWithViewPager(viewPager)
         fab.setOnClickListener { showAgendaForm() }

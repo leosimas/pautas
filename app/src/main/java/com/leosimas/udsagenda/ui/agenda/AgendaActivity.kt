@@ -2,6 +2,7 @@ package com.leosimas.udsagenda.ui.agenda
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +25,11 @@ class AgendaActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        supportActionBar?.apply {
+            setTitle(R.string.add_agenda)
+            setDisplayHomeAsUpEnabled(true)
+        }
+
         buttonFinish.isEnabled = false
         buttonFinish.enableWhenAllFilled(
             textTitle.editText,
@@ -61,5 +67,12 @@ class AgendaActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK)
             finish()
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> { finish(); return true }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

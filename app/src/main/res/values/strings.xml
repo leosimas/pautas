@@ -37,4 +37,5 @@
     <string name="empty_agenda_list">Nenhuma pauta %s encontrada</string>
     <string name="open_agenda">aberta</string>
     <string name="closed_agenda">finalizada</string>
+    <string name="add_agenda">Adicionar Pauta</string>
 </resources>
